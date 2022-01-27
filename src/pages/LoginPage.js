@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = React.useState({
     userName: "",
     passWord: "",
+    err: "",
   });
   const [user, setUser] = React.useState([]);
   const [formErrors, setFormErrors] = useState({});
@@ -27,25 +29,11 @@ const LoginPage = () => {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    setFormErrors(validate(formData));
-  };
-
-  const validate = (values) => {
-    const errors = {};
-    const enteredUsername = formData.userName;
-    const enteredPassword = formData.passWord;
-
-    user.forEach((item) => {
-      if (item.email !== enteredUsername) {
-        errors.userName = "Invalid username or password";
-      } else if (item.username + "123" !== enteredPassword) {
-        errors.passWord = "Invalid username or password";
-      } else {
-        navigate("postsDetails");
-      }
-    });
-    return errors;
+    const errors = validated(user, formData);
+    setFormErrors(validated(user, formData));
+    if (errors.err === false) {
+      navigate("postsDetails");
+    }
   };
 
   return (
@@ -84,3 +72,20 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+const validated = (user, formData) => {
+  const errors = {};
+  const enteredUsername = formData.userName;
+  const enteredPassword = formData.passWord;
+
+  user.forEach((item) => {
+    if (item.email !== enteredUsername) {
+      errors.userName = "Invalid username or password";
+    } else if (item.username + "123" !== enteredPassword) {
+      errors.passWord = "Invalid username or password";
+    } else {
+      errors.err = false;
+    }
+  });
+  return errors;
+};
