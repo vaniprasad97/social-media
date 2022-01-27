@@ -3,7 +3,6 @@ import LoginPage from "./pages/LoginPage";
 import Posts from "./pages/Posts";
 import PostsDetails from "./pages/PostsDetails";
 import Profile from "./pages/Profile";
-import "./styles/App.css";
 
 function App() {
   return (
