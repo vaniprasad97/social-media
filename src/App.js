@@ -1,10 +1,9 @@
-import "./styles/App.css";
-import "./styles/LoginPage.css"
 import { Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
-import PostsDetails from "./pages/PostsDetails";
 import Posts from "./pages/Posts";
+import PostsDetails from "./pages/PostsDetails";
 import Profile from "./pages/Profile";
+import "./styles/App.css";
 
 function App() {
   return (

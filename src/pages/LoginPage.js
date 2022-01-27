@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/LoginPage.css";
+
 
 const LoginPage = () => {
-  const history = useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = React.useState({
     userName: "",
     passWord: "",
@@ -36,35 +38,39 @@ const LoginPage = () => {
     const enteredPassword = formData.passWord;
 
     user.map((item) => {
-      if (item.email !== enteredUsername) {
-        errors.userName = "User not exist";
-      } else if (item.username + "123" !== enteredPassword) {
-        errors.passWord = "Enter a valid password";
-      } else if (
-        item.email === enteredUsername &&
-        item.username + "123" === enteredPassword
-      ) {
-        history("postsDetails");
+      if (item.email !== enteredUsername  ) {
+        errors.userName = "Invalid username or password";
+      }else if(item.username + "123" !== enteredPassword)
+      {
+        errors.passWord = "Invalid username or password";
+      }
+      else{
+        navigateTopostpage();
       }
     });
     return errors;
   };
+  function navigateTopostpage() 
+  {
+    navigate("postsDetails");
+  }
 
   return (
     <div className="container">
       <h1>Socio-Connect</h1>
       <form onSubmit={handleSubmit} className="login-form">
+    <fieldset>
         <input
           className="Email"
-          type="text"
+          type= "email"
           placeholder="Email address"
           name="userName"
           value={formData.userName}
           onChange={handleChange}
           required
         />
-        <p>{formErrors.userName}</p>
-
+        
+        
         <input
           className="Password"
           type="password"
@@ -74,11 +80,11 @@ const LoginPage = () => {
           onChange={handleChange}
           required
         />
-        <p>{formErrors.passWord}</p>
-
-        <button type="submit" className="submit">
-          Log In
+         <p>{formErrors.userName}</p>
+        <button type="submit" className="login-button">
+          Log In 
         </button>
+        </fieldset>
       </form>
     </div>
   );

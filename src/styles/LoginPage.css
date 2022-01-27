@@ -8,17 +8,7 @@ body {
   background: -webkit-linear-gradient(to right, #6fb1fc, #4364f7, #0052d4);
   background: linear-gradient(to right, #6fb1fc, #4364f7, #0052d4);
 }
-.container h1 {
-  font-family: "Alfa Slab One", cursive;
-  font-family: "Nunito", sans-serif;
-  font-family: "Roboto", sans-serif;
-  color: navy;
-  text-align: center;
-  margin-bottom: 20px;
-}
-.container p {
-  color: red;
-}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -32,7 +22,24 @@ body {
   box-shadow: 0 0 20px0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.submit {
+.container h1 {
+  font-family: "Alfa Slab One", cursive;
+  font-family: "Nunito", sans-serif;
+  font-family: "Roboto", sans-serif;
+  color: navy;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container p {
+  color: red;
+}
+
+.container fieldset {
+  border: none;
+}
+
+.login-button {
   margin: 0;
   width: 200px;
   align-self: center;
@@ -45,6 +52,7 @@ body {
   cursor: pointer;
   border-radius: 3px;
 }
+
 .Email,
 .Password {
   width: 100%;
@@ -53,15 +61,4 @@ body {
   border: 1px solid #dbdbdb;
   box-sizing: border-box;
   border-radius: 3px;
-}
-
-.login__icon {
-  position: absolute;
-  top: 30px;
-  color: #7875b5;
-}
-.login-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
