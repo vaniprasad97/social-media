@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/LoginPage.css";
 
 const LoginPage = () => {
@@ -32,7 +32,7 @@ const LoginPage = () => {
     const errors = validated(user, formData);
     setFormErrors(validated(user, formData));
     if (errors.err === false) {
-      navigate("postsDetails");
+      navigate("posts");
     }
   };
 
@@ -84,6 +84,8 @@ const validated = (user, formData) => {
     } else if (item.username + "123" !== enteredPassword) {
       errors.passWord = "Invalid username or password";
     } else {
+      localStorage.setItem("postArray", JSON.stringify(item));
+
       errors.err = false;
     }
   });

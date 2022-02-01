@@ -1,0 +1,89 @@
+.nav {
+  display: flex;
+  align-items: center;
+  background-color: #182c61;
+  height: 10px;
+  padding: 30px 25px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+}
+.profile-pic {
+  background: #4a69bd;
+  color: white;
+  padding: 5px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.nav h2 {
+  color: white;
+}
+
+.nav-logo {
+  width: 50px;
+}
+.nav-items {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+.nav-items > li {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+}
+.signout-button {
+  background-color: #eb2f06;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
+  font-weight: bolder;
+  position: relative;
+  right: 30%;
+}
+
+.posts-display {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  max-width: 700px;
+  height: 300px;
+  margin: auto;
+  font-family: arial;
+  margin-top: 90px;
+
+  align-items: center;
+}
+.posts-display h4 {
+  text-align: center;
+  margin-top: 20px;
+  color: #2d3436;
+}
+.posts-display h3 {
+  padding: 10px;
+  color: #4a69bd;
+}
+.posts-display p {
+  text-align: center;
+  justify-content: center;
+  margin-top: 60px;
+  color: #636e72;
+}
+.view-post-buttton {
+  display: block;
+  width: 100%;
+  margin-top: 77px;
+  border: none;
+  background-color: #182c61;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
