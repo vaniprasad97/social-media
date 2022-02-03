@@ -4,14 +4,13 @@ import "../styles/LoginPage.css";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-
+  const [users, setUser] = React.useState([]);
+  const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = React.useState({
     userName: "",
     passWord: "",
     err: "",
   });
-  const [user, setUser] = React.useState([]);
-  const [formErrors, setFormErrors] = useState({});
 
   React.useEffect(function () {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -27,17 +26,18 @@ const LoginPage = () => {
       };
     });
   }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const errors = validated(user, formData);
-    setFormErrors(validated(user, formData));
+    const errors = validated(users, formData);
+    setFormErrors(validated(users, formData));
     if (errors.err === false) {
-      navigate("posts");
+      navigate("/posts");
     }
   };
 
   return (
-    <div className="container">
+    <div className="login-container">
       <h1>Socio-Connect</h1>
       <form onSubmit={handleSubmit} className="login-form">
         <fieldset>
@@ -84,7 +84,7 @@ const validated = (user, formData) => {
     } else if (item.username + "123" !== enteredPassword) {
       errors.passWord = "Invalid username or password";
     } else {
-      localStorage.setItem("postArray", JSON.stringify(item));
+      localStorage.setItem("selectedUser", JSON.stringify(item));
 
       errors.err = false;
     }

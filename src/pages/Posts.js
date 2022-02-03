@@ -1,29 +1,29 @@
 import React from "react";
 import Header from "../components/Header";
 import "../styles/Posts.css";
-import Post from "../components/Post";
+import Card from "../components/Card";
 
-const PostsDetails = () => {
-  const userArray = JSON.parse(localStorage.getItem("postArray"));
+const Posts = () => {
+  const loggedInUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [posts, setPosts] = React.useState([]);
+
   React.useEffect(function () {
     fetch("https://jsonplaceholder.typicode.com/posts")
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
-  console.log(userArray.id);
 
-  const userPost = posts.filter((item) => {
-    if (userArray.id === item.userId) {
+  const selectedPost = posts.filter((item) => {
+    if (loggedInUser.id === item.userId) {
       return item;
     }
   });
-  console.log(userPost);
-  const post = userPost.map((item) => {
+
+  const card = selectedPost.map((item) => {
     return (
-      <Post
+      <Card
         title={item.title}
-        username={userArray.username}
+        username={loggedInUser.username}
         postBody={item.body}
       />
     );
@@ -32,9 +32,9 @@ const PostsDetails = () => {
   return (
     <div>
       <Header />
-      <div>{post}</div>
+      <div className="post-list">{card}</div>
     </div>
   );
 };
 
-export default PostsDetails;
+export default Posts;
