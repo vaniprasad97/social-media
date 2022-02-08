@@ -4,8 +4,15 @@ import "../styles/Posts.css";
 import Card from "../components/Card";
 
 const Posts = () => {
-  const allUser = JSON.parse(localStorage.getItem("allUsers"));
   const [posts, setPosts] = React.useState([]);
+  const [allUsers, setAllUsers] = React.useState([]);
+  const allUsersAndPosts = [
+    {
+      name: "",
+      post: "",
+      title: "",
+    },
+  ];
 
   React.useEffect(function () {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -13,28 +20,26 @@ const Posts = () => {
       .then((data) => setPosts(data));
   }, []);
 
+  React.useEffect(function () {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setAllUsers(data));
+  }, []);
 
-  const allUsersAndPosts= [
-    {
-      name: "",
-      post: "",
-      title: "",
-    },
-  ];
-  for (let i = 0; i < allUser.length; i++) {
-    for (let k = 0; k < posts.length; k++) {
-      if (allUser[i].id === posts[k].userId) {
+  allUsers.map((userItem) => {
+    posts.map((postItem) => {
+      if (userItem.id === postItem.userId) {
         allUsersAndPosts.push({
-          name: allUser[i].name,
-          post: posts[k].body,
-          title: posts[k].title,
+          name: userItem.name,
+          post: postItem.body,
+          title: postItem.title,
         });
       }
-    }
-  }
+    });
+  });
 
   const card = allUsersAndPosts.map((randomUser) => {
-    randomUser = allUsersAndPosts[Math.floor(Math.random() * allUsersAndPosts.length)];
+  randomUser = allUsersAndPosts[Math.floor(Math.random() * allUsersAndPosts.length)];
 
     return (
       <Card
@@ -47,9 +52,7 @@ const Posts = () => {
 
   return (
     <div>
-      <header>
-        <Header />
-      </header>
+      <Header />
       <div className="post-list">{card}</div>
     </div>
   );

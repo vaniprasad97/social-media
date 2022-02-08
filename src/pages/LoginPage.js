@@ -17,8 +17,7 @@ const LoginPage = () => {
       .then((res) => res.json())
       .then((data) => setUser(data));
   }, []);
-  localStorage.setItem("allUsers", JSON.stringify(users));
-
+  
   function handleChange(event) {
     setFormData((prevFormData) => {
       return {
@@ -86,8 +85,6 @@ const validated = (user, formData) => {
       errors.passWord = "Invalid username or password";
     } else {
       localStorage.setItem("selectedUser", JSON.stringify(item));
-      
-
       errors.err = false;
     }
   });
