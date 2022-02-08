@@ -4,7 +4,7 @@ import "../styles/Posts.css";
 import Card from "../components/Card";
 
 const Posts = () => {
-  const loggedInUser = JSON.parse(localStorage.getItem("selectedUser"));
+  const allUser = JSON.parse(localStorage.getItem("allUsers"));
   const [posts, setPosts] = React.useState([]);
 
   React.useEffect(function () {
@@ -13,25 +13,43 @@ const Posts = () => {
       .then((data) => setPosts(data));
   }, []);
 
-  const selectedPost = posts.filter((item) => {
-    if (loggedInUser.id === item.userId) {
-      return item;
-    }
-  });
 
-  const card = selectedPost.map((item) => {
+  const allUsersAndPosts= [
+    {
+      name: "",
+      post: "",
+      title: "",
+    },
+  ];
+  for (let i = 0; i < allUser.length; i++) {
+    for (let k = 0; k < posts.length; k++) {
+      if (allUser[i].id === posts[k].userId) {
+        allUsersAndPosts.push({
+          name: allUser[i].name,
+          post: posts[k].body,
+          title: posts[k].title,
+        });
+      }
+    }
+  }
+
+  const card = allUsersAndPosts.map((randomUser) => {
+    randomUser = allUsersAndPosts[Math.floor(Math.random() * allUsersAndPosts.length)];
+
     return (
       <Card
-        title={item.title}
-        username={loggedInUser.username}
-        postBody={item.body}
+        title={randomUser.title}
+        username={randomUser.name}
+        postBody={randomUser.post}
       />
     );
   });
 
   return (
     <div>
-      <Header />
+      <header>
+        <Header />
+      </header>
       <div className="post-list">{card}</div>
     </div>
   );
