@@ -1,18 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import "../styles/Posts.css";
 import Card from "../components/Card";
 
 const Posts = () => {
   const [posts, setPosts] = React.useState([]);
-  const [allUsers, setAllUsers] = React.useState([]);
-  const allUsersAndPosts = [
-    {
-      name: "",
-      post: "",
-      title: "",
-    },
-  ];
+  const [users, setUsers] = React.useState([]);
+  const [allPosts, setAllPosts] = React.useState([]);
 
   React.useEffect(function () {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -23,29 +17,35 @@ const Posts = () => {
   React.useEffect(function () {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
-      .then((data) => setAllUsers(data));
+      .then((data) => setUsers(data));
   }, []);
 
-  allUsers.map((userItem) => {
-    posts.map((postItem) => {
-      if (userItem.id === postItem.userId) {
-        allUsersAndPosts.push({
-          name: userItem.name,
-          post: postItem.body,
-          title: postItem.title,
+  useEffect(() => {
+    if (posts.length != 0 && users.length != 0) {
+      users.forEach((userItem) => {
+        posts.forEach((postItem) => {
+          if (userItem.id === postItem.userId) {
+            setAllPosts((posts) => [
+              ...posts,
+              {
+                name: userItem.name,
+                post: postItem.body,
+                title: postItem.title,
+              },
+            ]);
+          }
         });
-      }
-    });
-  });
+      });
+    }
+  }, [posts, users]);
 
-  const card = allUsersAndPosts.map((randomUser) => {
-  randomUser = allUsersAndPosts[Math.floor(Math.random() * allUsersAndPosts.length)];
-
+  const card = allPosts.map((randomPost) => {
+    randomPost = allPosts[Math.floor(Math.random() * allPosts.length)];
     return (
       <Card
-        title={randomUser.title}
-        username={randomUser.name}
-        postBody={randomUser.post}
+        title={randomPost.title}
+        username={randomPost.name}
+        postBody={randomPost.post}
       />
     );
   });
