@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import "../styles/Posts.css";
 import Card from "../components/Card";
 
 const Posts = () => {
-  const loggedInUser = JSON.parse(localStorage.getItem("selectedUser"));
   const [posts, setPosts] = React.useState([]);
+  const [users, setUsers] = React.useState([]);
+  const [allPosts, setAllPosts] = React.useState([]);
 
   React.useEffect(function () {
     fetch("https://jsonplaceholder.typicode.com/posts")
@@ -13,18 +14,38 @@ const Posts = () => {
       .then((data) => setPosts(data));
   }, []);
 
-  const selectedPost = posts.filter((item) => {
-    if (loggedInUser.id === item.userId) {
-      return item;
-    }
-  });
+  React.useEffect(function () {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((data) => setUsers(data));
+  }, []);
 
-  const card = selectedPost.map((item) => {
+  useEffect(() => {
+    if (posts.length != 0 && users.length != 0) {
+      users.forEach((userItem) => {
+        posts.forEach((postItem) => {
+          if (userItem.id === postItem.userId) {
+            setAllPosts((posts) => [
+              ...posts,
+              {
+                name: userItem.name,
+                post: postItem.body,
+                title: postItem.title,
+              },
+            ]);
+          }
+        });
+      });
+    }
+  }, [posts, users]);
+
+  const card = allPosts.map((randomPost) => {
+    randomPost = allPosts[Math.floor(Math.random() * allPosts.length)];
     return (
       <Card
-        title={item.title}
-        username={loggedInUser.username}
-        postBody={item.body}
+        title={randomPost.title}
+        username={randomPost.name}
+        postBody={randomPost.post}
       />
     );
   });
