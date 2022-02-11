@@ -59,10 +59,12 @@
   margin-top: 20px;
   color: #2d3436;
 }
+
 .posts-display h3 {
   padding: 10px;
   color: #4a69bd;
 }
+
 .posts-display p {
   text-align: center;
   justify-content: center;
@@ -94,6 +96,7 @@
   background: white;
   outline: 3px solid #182c61;
 }
+
 .card-body {
   padding: 1rem;
   display: flex;
@@ -106,9 +109,11 @@
   text-transform: capitalize;
   color: #2d3436;
 }
+
 .card-body p {
   font-size: 1rem;
 }
+
 .card-footer {
   display: flex;
   padding: 1rem;
@@ -130,4 +135,33 @@
   font-weight: bolder;
   color: #182c61;
   cursor: pointer;
+}
+
+.postdetails {
+  background-color: white;
+  padding: 15px;
+}
+
+.postdetails h3 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.postdetails h4 {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.postdetails h5 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.commentItems p {
+  margin-top: 5px;
+}
+
+.commentbox {
+  padding: 12px 12px;
+  box-sizing: border-box;
 }
