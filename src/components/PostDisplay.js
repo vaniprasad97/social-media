@@ -1,47 +1,44 @@
 import React from "react";
+import { useState } from "react";
 
 export const PostDisplay = (props) => {
-  const [comments, setComments] = React.useState([]);
-  const [formData, setFormData] = React.useState({ comment: "" });
+  const [allComments, setAllComments] = React.useState([]);
+  const [userComment, setUserComment] = useState([]);
+  const [comment, setComment] = useState("");
+  const loggedinUser = JSON.parse(localStorage.getItem("selectedUser"));
 
   React.useEffect(function () {
     fetch(`https://jsonplaceholder.typicode.com/posts/${props.postid}/comments`)
       .then((res) => res.json())
-      .then((data) => setComments(data));
+      .then((data) => setAllComments(data));
   }, []);
 
   function handleChange(event) {
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [event.target.name]: event.target.value,
-      };
-    });
+    setComment(event.target.value);
   }
 
-  function handleSubmit(event) {
+  const handleSubmit = (event) => {
     event.preventDefault();
-  }
-  
-  const postComment = comments.map((item) => (
-    <p>
-      <b> {item.email} </b> : {item.body}
-    </p>
-  ));
+    setUserComment((prevState) => [...prevState, comment]);
+  };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="commentbox"
-          type="text"
-          placeholder="comment"
-          onChange={handleChange}
-          name="comment"
-        />
-        <button type="submit"> add comment</button>
+      <form onSubmit={(event) => handleSubmit(event)}>
+        <input type="text" value={comment} onChange={handleChange} />
+        <button type="submit">Add Comment</button>
       </form>
-      <p>{formData.comment}</p>
-      <div className="commentItems">{postComment}</div>
+      <ul className="postcomments">
+        {userComment.map((item) => (
+          <li>
+            <b>{loggedinUser.name}</b> : {item}
+          </li>
+        ))}
+        {allComments.map((item) => (
+          <li>
+            <b> {item.email} </b> : {item.body}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

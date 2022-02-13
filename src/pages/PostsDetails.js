@@ -14,15 +14,17 @@ const PostsDetails = () => {
   }, []);
 
   return (
-    <div className="postdetails">
+    <div>
       <Header />
-      <p>
-        Back to<Link to="/posts"> Posts Page</Link>
-      </p>
-      <h3>{posts.title}</h3>
-      <h4>{posts.body}</h4>
-      <h5>Comments</h5>
-      <PostDisplay postid={postid} />;
+      <div className="postdetails">
+        <p>
+          Back to<Link to="/posts"> Posts Page</Link>
+        </p>
+        <h3>{posts.title}</h3>
+        <h4>{posts.body}</h4>
+        <h5>Comments</h5>
+        <PostDisplay postid={postid} />
+      </div>
     </div>
   );
 };
