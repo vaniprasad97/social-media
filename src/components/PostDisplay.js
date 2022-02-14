@@ -2,8 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 export const PostDisplay = (props) => {
-  const [allComments, setAllComments] = React.useState([]);
-  const [userComment, setUserComment] = useState([]);
+  const [allComments, setAllComments] = useState([]);
   const [comment, setComment] = useState("");
   const loggedinUser = JSON.parse(localStorage.getItem("selectedUser"));
 
@@ -19,8 +18,13 @@ export const PostDisplay = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    setUserComment((prevState) => [...prevState, comment]);
+    setAllComments((prevState) => [
+      ...prevState,
+      { body: comment, email: loggedinUser.name },
+    ]);
+    setComment("");
   };
+
   return (
     <div>
       <form onSubmit={(event) => handleSubmit(event)}>
@@ -28,11 +32,6 @@ export const PostDisplay = (props) => {
         <button type="submit">Add Comment</button>
       </form>
       <ul className="postcomments">
-        {userComment.map((item) => (
-          <li>
-            <b>{loggedinUser.name}</b> : {item}
-          </li>
-        ))}
         {allComments.map((item) => (
           <li>
             <b> {item.email} </b> : {item.body}
