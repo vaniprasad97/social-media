@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../components/Header";
-import { PostDisplay } from "../components/PostDisplay";
+import { CommentDisplay } from "../components/CommentDisplay";
 
 const PostsDetails = () => {
   const { postid } = useParams();
@@ -23,7 +23,7 @@ const PostsDetails = () => {
         <h3>{posts.title}</h3>
         <h4>{posts.body}</h4>
         <h5>Comments</h5>
-        <PostDisplay postid={postid} />
+        <CommentDisplay postid={postid} />
       </div>
     </div>
   );

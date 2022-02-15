@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-export const PostDisplay = (props) => {
+export const CommentDisplay = (props) => {
   const [allComments, setAllComments] = useState([]);
   const [comment, setComment] = useState("");
   const loggedinUser = JSON.parse(localStorage.getItem("selectedUser"));
