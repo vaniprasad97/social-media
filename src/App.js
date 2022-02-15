@@ -26,7 +26,7 @@ function App() {
           }
         />
         <Route
-          path="/postsDetails"
+          path="/postsDetails/:postid"
           element={
             <ProtectedRoute>
               <PostsDetails />

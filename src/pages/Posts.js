@@ -21,13 +21,14 @@ const Posts = () => {
   }, []);
 
   useEffect(() => {
-    if (posts.length != 0 && users.length != 0) {
+    if (posts.length !== 0 && users.length !== 0) {
       users.forEach((userItem) => {
         posts.forEach((postItem) => {
           if (userItem.id === postItem.userId) {
             setAllPosts((posts) => [
               ...posts,
               {
+                postid: postItem.id,
                 name: userItem.name,
                 post: postItem.body,
                 title: postItem.title,
@@ -43,6 +44,7 @@ const Posts = () => {
     randomPost = allPosts[Math.floor(Math.random() * allPosts.length)];
     return (
       <Card
+        postid={randomPost.postid}
         title={randomPost.title}
         username={randomPost.name}
         postBody={randomPost.post}
