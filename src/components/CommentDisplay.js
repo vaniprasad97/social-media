@@ -1,16 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import useGetApiData from "../hooks/useGetApiData";
 
 export const CommentDisplay = (props) => {
-  const [allComments, setAllComments] = useState([]);
+  const [allComments, setAllComments] = useGetApiData(
+    `https://jsonplaceholder.typicode.com/posts/${props.postid}/comments`
+  );
   const [comment, setComment] = useState("");
   const loggedinUser = JSON.parse(localStorage.getItem("selectedUser"));
-
-  React.useEffect(function () {
-    fetch(`https://jsonplaceholder.typicode.com/posts/${props.postid}/comments`)
-      .then((res) => res.json())
-      .then((data) => setAllComments(data));
-  }, []);
 
   function handleChange(event) {
     setComment(event.target.value);

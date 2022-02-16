@@ -2,16 +2,13 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import Header from "../components/Header";
 import { CommentDisplay } from "../components/CommentDisplay";
+import useGetApiData from "../hooks/useGetApiData";
 
 const PostsDetails = () => {
   const { postid } = useParams();
-  const [posts, setPosts] = React.useState([]);
-
-  React.useEffect(function () {
-    fetch("https://jsonplaceholder.typicode.com/posts/" + postid)
-      .then((res) => res.json())
-      .then((data) => setPosts(data));
-  }, []);
+  const [posts] = useGetApiData(
+    "https://jsonplaceholder.typicode.com/posts/" + postid
+  );
 
   return (
     <div>
