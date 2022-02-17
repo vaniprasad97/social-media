@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
-import { getInitials } from "../functions/getInitials";
-import { getUserAddress } from "../functions/getUserAddress";
 import { getUserDetail } from "../functions/getUserDetail";
 
 const Profile = () => {
@@ -14,7 +12,7 @@ const Profile = () => {
       </p>
 
       <div className="username-profilepic">
-        <h1>{getInitials()}</h1>
+        <h1>{getUserDetail("initials")}</h1>
         <h2>&ensp;{getUserDetail("name")}</h2>
       </div>
 
@@ -30,7 +28,7 @@ const Profile = () => {
           </tr>
           <tr>
             <th>Address</th>
-            <th>{getUserAddress()}</th>
+            <th>{getUserDetail("address")}</th>
           </tr>
           <tr>
             <th>Phone</th>

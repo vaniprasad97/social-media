@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { getInitials } from "../functions/getInitials";
 import { getUserDetail } from "../functions/getUserDetail";
 
 const Header = () => {
@@ -22,7 +21,7 @@ const Header = () => {
           <h3 onClick={signOut}>Logout</h3>
           <ul className="nav-items">
             <li className="profile-pic" onClick={gotoProfile}>
-              {getInitials()}
+              {getUserDetail("initials")}
             </li>
             <li className="profile-name">{getUserDetail("name")}</li>
           </ul>
