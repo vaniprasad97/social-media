@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useGetApiData from "../hooks/useGetApiData";
 import "../styles/LoginPage.css";
+import { getUserValidation } from "../functions/getUserValidation";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [users, setUser] = React.useState([]);
+  const [users] = useGetApiData("https://jsonplaceholder.typicode.com/users");
   const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = React.useState({
     userName: "",
@@ -12,12 +14,6 @@ const LoginPage = () => {
     err: "",
   });
 
-  React.useEffect(function () {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((res) => res.json())
-      .then((data) => setUser(data));
-  }, []);
-  
   function handleChange(event) {
     setFormData((prevFormData) => {
       return {
@@ -29,8 +25,8 @@ const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const errors = validated(users, formData);
-    setFormErrors(validated(users, formData));
+    const errors = getUserValidation(users, formData);
+    setFormErrors(getUserValidation(users, formData));
     if (errors.err === false) {
       navigate("/posts");
     }
@@ -72,21 +68,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
-const validated = (user, formData) => {
-  const errors = {};
-  const enteredUsername = formData.userName;
-  const enteredPassword = formData.passWord;
-
-  user.forEach((item) => {
-    if (item.email !== enteredUsername) {
-      errors.userName = "Invalid username or password";
-    } else if (item.username + "123" !== enteredPassword) {
-      errors.passWord = "Invalid username or password";
-    } else {
-      localStorage.setItem("selectedUser", JSON.stringify(item));
-      errors.err = false;
-    }
-  });
-  return errors;
-};

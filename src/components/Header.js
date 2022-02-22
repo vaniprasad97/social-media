@@ -1,9 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { getUserDetail } from "../functions/getUserDetail";
 
 const Header = () => {
-  const loggedInUser = JSON.parse(localStorage.getItem("selectedUser"));
-  const firstWord = loggedInUser.name.match(/\b(\w)/g).join("");
   const navigate = useNavigate();
 
   function gotoProfile() {
@@ -22,9 +21,9 @@ const Header = () => {
           <h3 onClick={signOut}>Logout</h3>
           <ul className="nav-items">
             <li className="profile-pic" onClick={gotoProfile}>
-              {firstWord}
+              {getUserDetail("initials")}
             </li>
-            <li className="profile-name">{loggedInUser.name}</li>
+            <li className="profile-name">{getUserDetail("name")}</li>
           </ul>
         </nav>
       </header>

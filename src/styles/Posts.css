@@ -171,9 +171,78 @@
 }
 
 .postcomments li {
-  background: #cce5ff;
+  background: #dfe6e9;
   color: darblue;
   margin: 5px;
   margin-top: 10px;
   font-size: large;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.postdetails input[type="text"] {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 2px solid #21222a;
+}
+
+.postdetails button {
+  background: #21222a;
+  margin-left: 10px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: 2px solid #21222a;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+.username-profilepic {
+  margin-top: 20px;
+  clear: both;
+  text-align: center;
+}
+
+.username-profilepic h1 {
+  display: inline-block;
+  display: inline;
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  background: darkblue;
+  font-weight: 800;
+  padding: 5px;
+}
+
+.username-profilepic h2 {
+  display: inline;
+  font-size: 35px;
+  display: inline-block;
+  text-shadow: 2px 2px darkblue;
+  color: white;
+}
+
+.user-details {
+  margin-top: 20px;
+}
+
+.user-details table {
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+  margin: auto;
+  text-align: center;
+  width: 30%;
+  font-size: larger;
+  box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+    rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+    rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.user-details table th {
+  text-align: left;
+  padding: 10px;
 }
